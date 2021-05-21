@@ -1,0 +1,29 @@
+{{ template "base" . }}
+
+{{ define "content" }}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1>Welcome to the About page</h1>
+                <p>This is some text</p>
+
+                <!-- searching for something that has an indicies
+                . referes to all of the data
+                StringMap refers to a type in the data
+                where the value = "test" -->
+                <p>This came from the template: {{ index .StringMap "test" }}</p>
+
+                <p>
+                    <!-- if the remote_ip is not empty -->
+                    {{ if ne (index .StringMap "remote_ip") "" }}
+                        Youre remote IP address is {{ index .StringMap "remote_ip" }}
+                    {{ else }}
+                        I don't know your ip address yet. 
+                        Visit the <a href="/">Home Page</a> so I can set it.
+                    {{ end }}
+                </p>
+
+            </div>
+        </div>
+    </div>
+{{ end }}
