@@ -1,0 +1,42 @@
+{{ template "base" . }}
+
+{{ define "title" }}
+Generals Quarters
+{{ end }}
+
+{{ define "css" }}
+<link rel="stylesheet" href="/static/css/room.css">
+{{ end }}
+
+{{ define "content" }}
+<div class="container">
+
+    <!-- main image display -->
+    <div class="row">
+        <div class="col">
+            <img src="/static/images/generals-quarters.png" class="img-fluid img-thumbnail mx-auto d-block room-image" alt="room image">
+        </div>
+    </div>
+
+    <!-- title and description -->
+    <div class="row">
+        <div class="col">
+            <h1 class="text-center mt-4">Welcome to the General's page!</h1>
+            <p>
+                Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum 
+                Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum 
+                Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum 
+                Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum 
+                Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum
+            </p>
+        </div>
+    </div>
+
+    <!-- make reseravations  -->
+    <div class="row">
+        <div class="col text-center">
+            <a href="make-reservation" class="btn btn-success">Check Availability</a>
+        </div>
+    </div>
+</div>
+{{ end }}

@@ -1,0 +1,54 @@
+{{ template "base" . }}
+
+{{ define "title" }}
+Contact
+{{ end }}
+
+{{ define "css" }}
+<link rel="stylesheet" href="/static/css/contact.css">
+{{ end }}
+
+{{ define "content" }}
+<div class="container">
+
+    <div class="row">
+        <div class="col">
+            <h1>Make Reservation</h1>
+
+            <!-- validation post -->
+            <form action="" method="POST" class="needs-validation" novalidate>
+
+                <!-- first name -->
+                <div class="form-group mt-5">
+                    <label for="first_name">First name:</label>
+                    <input type="text" name="first_name" id="first_name" class="form-control" required autocomplete="off" />
+                </div>
+
+                <!-- last name -->
+                <div class="form-group pt-3">
+                    <label for="last_name">Last name:</label>
+                    <input type="text" name="last_name" id="last_name" class="form-control" required autocomplete="off" />
+                </div>
+
+                <!-- email -->
+                <div class="form-group pt-3">
+                    <label for="last_name">Email:</label>
+                    <input type="text" name="emailj" id="email" class="form-control" required autocomplete="off" />
+                </div>
+
+                <!-- phone number -->
+                <div class="form-group pt-3">
+                    <label for="phone">Phone number:</label>
+                    <input type="text" name="phone" id="phone" class="form-control" required autocomplete="off" />
+                </div>
+
+                <hr>
+
+                <input type="submit" class="btn btn-primary" value="Make Reservation">
+
+            </form>
+        </div>
+    </div>
+
+</div>
+{{ end }}

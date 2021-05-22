@@ -1,0 +1,44 @@
+{{ template "base" . }}
+
+{{ define "content" }}
+<div class="container">
+<div class="row">
+    <!-- only for centering -->
+    <div class="col-md-3"></div>
+
+    <div class="col-md-6">
+        <h1 class="mt-5">Search for Availability</h1>
+
+        <!-- reservation form -->
+        <form action="/make-reservation" method="POST">
+        
+            <div class="row">
+            
+                <!-- start date -->
+                <div class="col">
+                    <div class="form-group">
+                      <label for="start_date" class="form-label">Starting Date</label>
+                      <!-- for="start_date" from above and id="start_date" below must match -->
+                      <!-- name could be whatever you want but itll be used as the field when sent to the backend -->
+                      <input required type="date" class="form-control" id="start_date" name="start_date" aria-describedby="startDateHelp">
+                      <small id="startDateHelp" class="form-text">Enter your starting date in the form of YYYY-MM-DD.</small>
+                    </div>
+                </div>
+            
+                <!-- end date -->
+                <div class="col">
+                    <div class="form-group">
+                      <label for="end_date" class="form-label">Ending Date</label>
+                      <input required type="date" class="form-control" id="end_date" name="end_date" aria-describedby="endDateHelp">
+                      <small id="endDateHelp" class="form-text">Enter your ending date in the form of YYYY-MM-DD.</div>
+                    </div>
+                </div>
+            
+                <button type="submit" class="btn btn-primary">Search Availability</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+</div>
+{{ end }}
