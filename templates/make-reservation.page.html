@@ -5,7 +5,10 @@ Contact
 {{ end }}
 
 {{ define "css" }}
-<link rel="stylesheet" href="/static/css/contact.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker-bs4.min.css">
+<link rel="stylesheet" type="text/css" href="https://unpkg.com/notie/dist/notie.min.css">
+<link rel="stylesheet" href="sweetalert2.min.css">
+<link rel="stylesheet" href="/static/css/make-reservations.css">
 {{ end }}
 
 {{ define "content" }}
@@ -49,6 +52,12 @@ Contact
             </form>
         </div>
     </div>
-
 </div>
+{{ end }}
+
+{{ define "js" }}
+<script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/js/datepicker-full.min.js"></script>
+<script src="https://unpkg.com/notie"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="../static/js/reservations.js"></script>
 {{ end }}
