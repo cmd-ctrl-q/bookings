@@ -1,44 +1,59 @@
 {{ template "base" . }}
 
+{{ define "css" }}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker-bs4.min.css">
+<link rel="stylesheet" type="text/css" href="https://unpkg.com/notie/dist/notie.min.css">
+<link rel="stylesheet" href="sweetalert2.min.css">
+<link rel="stylesheet" href="/static/css/availability.css" class="css">
+{{ end }}
+
 {{ define "content" }}
 <div class="container">
-<div class="row">
-    <!-- only for centering -->
-    <div class="col-md-3"></div>
+    <div class="row">
+        <!-- only for centering -->
+        <div class="col-md-3"></div>
 
-    <div class="col-md-6">
-        <h1 class="mt-5">Search for Availability</h1>
+        <div class="col-md-6">
+            <h1 class="mt-3">Search for Availability</h1>
 
-        <!-- reservation form -->
-        <form action="/make-reservation" method="POST">
-        
-            <div class="row">
-            
-                <!-- start date -->
-                <div class="col">
-                    <div class="form-group">
-                      <label for="start_date" class="form-label">Starting Date</label>
-                      <!-- for="start_date" from above and id="start_date" below must match -->
-                      <!-- name could be whatever you want but itll be used as the field when sent to the backend -->
-                      <input required type="date" class="form-control" id="start_date" name="start_date" aria-describedby="startDateHelp">
-                      <small id="startDateHelp" class="form-text">Enter your starting date in the form of YYYY-MM-DD.</small>
+            <!-- reservation form -->
+            <form action="/make-reservation" method="POST" class="needs-validation" novalidate>
+
+                <!-- vanilla js date picker -->
+                <div class="row" id="reservation-dates">
+                    <!-- start date -->
+                    <div class="col">
+                        <input class="form-control" type="text" name="start" placeholder="Arrival date" required>
+                    </div>
+
+                    <!-- end date -->
+                    <div class="col">
+                        <input class="form-control" type="text" name="end" placeholder="Departure date" required>
                     </div>
                 </div>
-            
-                <!-- end date -->
-                <div class="col">
-                    <div class="form-group">
-                      <label for="end_date" class="form-label">Ending Date</label>
-                      <input required type="date" class="form-control" id="end_date" name="end_date" aria-describedby="endDateHelp">
-                      <small id="endDateHelp" class="form-text">Enter your ending date in the form of YYYY-MM-DD.</div>
-                    </div>
-                </div>
-            
+
+                <hr>
+
                 <button type="submit" class="btn btn-primary">Search Availability</button>
-            </div>
-        </form>
+            </form>
+        </div>
+        <div class="col-md-3"></div>
     </div>
-    <div class="col-md-3"></div>
+
+        <!-- random button -->
+        <div class="row">
+            <div class="col">
+                <p id="myParagraph">This is some text.</p>
+                <p>
+                    <button class="btn btn-outline-secondary" id="colorButton">Click me</button>
+                </p>
+            </div>
+        </div>
 </div>
-</div>
+{{ end }}
+
+{{ define "js" }}
+<script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/js/datepicker-full.min.js"></script>
+<script src="https://unpkg.com/notie"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 {{ end }}
