@@ -5,7 +5,11 @@ Majors Suite
 {{ end }}
 
 {{ define "css" }}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker-bs4.min.css">
+<link rel="stylesheet" type="text/css" href="https://unpkg.com/notie/dist/notie.min.css">
+<link rel="stylesheet" href="sweetalert2.min.css">
 <link rel="stylesheet" href="/static/css/room.css">
+<link rel="stylesheet" href="/static/css/availability.css" class="css">
 {{ end }}
 
 {{ define "content" }}
@@ -35,8 +39,35 @@ Majors Suite
     <!-- make reseravations  -->
     <div class="row">
         <div class="col text-center">
-            <a href="make-reservation" class="btn btn-success">Make Reservation Now</a>
+            <a id="check-availability-button" href="#!" class="btn btn-success">Check Availability</a>
         </div>
     </div>
 </div>
+{{ end }}
+
+{{ define "js" }}
+<script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/js/datepicker-full.min.js"></script>
+<script src="https://unpkg.com/notie"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="../static/js/availability.js"></script>
+<script>
+let attention = Prompt();
+
+document.getElementById("check-availability-button").addEventListener("click", function() {
+    let html = `
+    <form id="check-availability-form" action="" method="post" class="needs-validation" novalidate>
+        <div class="row" id="reservation-dates-modal">
+            <div class="col">
+                <input disabled class="form-control" type="text" id="start" name="start" placeholder="Arrival date" required>
+            </div>
+            <div class="col">
+                <input disabled class="form-control" type="text" id="end" name="end" placeholder="Departure date" required>
+            </div>
+        </div>
+    </form>
+    `
+    attention.custom({msg: html, title: "Choose your dates"});
+});
+
+</script>
 {{ end }}
