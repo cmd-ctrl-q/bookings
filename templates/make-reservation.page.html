@@ -5,59 +5,59 @@ Contact
 {{ end }}
 
 {{ define "css" }}
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker-bs4.min.css">
-<link rel="stylesheet" type="text/css" href="https://unpkg.com/notie/dist/notie.min.css">
-<link rel="stylesheet" href="sweetalert2.min.css">
-<link rel="stylesheet" href="/static/css/make-reservations.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker-bs4.min.css">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/notie/dist/notie.min.css">
+    <link rel="stylesheet" href="sweetalert2.min.css">
+    <link rel="stylesheet" href="/static/css/make-reservations.css">
 {{ end }}
 
 {{ define "content" }}
-<div class="container">
-
-    <div class="row">
-        <div class="col">
-            <h1>Make Reservation</h1>
-
-            <!-- validation post -->
-            <form action="" method="POST" class="needs-validation" novalidate>
-
-                <!-- first name -->
-                <div class="form-group mt-5">
-                    <label for="first_name">First name:</label>
-                    <input type="text" name="first_name" id="first_name" class="form-control" required autocomplete="off" />
-                </div>
-
-                <!-- last name -->
-                <div class="form-group pt-3">
-                    <label for="last_name">Last name:</label>
-                    <input type="text" name="last_name" id="last_name" class="form-control" required autocomplete="off" />
-                </div>
-
-                <!-- email -->
-                <div class="form-group pt-3">
-                    <label for="last_name">Email:</label>
-                    <input type="text" name="emailj" id="email" class="form-control" required autocomplete="off" />
-                </div>
-
-                <!-- phone number -->
-                <div class="form-group pt-3">
-                    <label for="phone">Phone number:</label>
-                    <input type="text" name="phone" id="phone" class="form-control" required autocomplete="off" />
-                </div>
-
-                <hr>
-
-                <input type="submit" class="btn btn-primary" value="Make Reservation">
-
-            </form>
+    <div class="container">
+    
+        <div class="row">
+            <div class="col">
+                <h1>Make Reservation</h1>
+            
+                <!-- validation post -->
+                <form action="" method="POST" class="needs-validation" novalidate>
+                
+                    <!-- first name -->
+                    <div class="form-group mt-5">
+                        <label for="first_name">First name:</label>
+                        <input type="text" name="first_name" id="first_name" class="form-control" required autocomplete="off" />
+                    </div>
+                
+                    <!-- last name -->
+                    <div class="form-group pt-3">
+                        <label for="last_name">Last name:</label>
+                        <input type="text" name="last_name" id="last_name" class="form-control" required autocomplete="off" />
+                    </div>
+                
+                    <!-- email -->
+                    <div class="form-group pt-3">
+                        <label for="last_name">Email:</label>
+                        <input type="text" name="emailj" id="email" class="form-control" required autocomplete="off" />
+                    </div>
+                
+                    <!-- phone number -->
+                    <div class="form-group pt-3">
+                        <label for="phone">Phone number:</label>
+                        <input type="text" name="phone" id="phone" class="form-control" required autocomplete="off" />
+                    </div>
+                
+                    <hr>
+                
+                    <input type="submit" class="btn btn-primary" value="Make Reservation">
+                
+                </form>
+            </div>
         </div>
     </div>
-</div>
 {{ end }}
 
 {{ define "js" }}
-<script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/js/datepicker-full.min.js"></script>
-<script src="https://unpkg.com/notie"></script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="../static/js/reservations.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/js/datepicker-full.min.js"></script>
+    <script src="https://unpkg.com/notie"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../static/js/reservations.js"></script>
 {{ end }}
