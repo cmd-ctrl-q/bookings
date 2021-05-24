@@ -7,9 +7,9 @@ import (
 	"time"
 
 	"github.com/alexedwards/scs/v2"
-	"github.com/cmd-ctrl-q/bookings/pkg/config"
-	"github.com/cmd-ctrl-q/bookings/pkg/handlers"
-	"github.com/cmd-ctrl-q/bookings/pkg/render"
+	"github.com/cmd-ctrl-q/bookings/internal/config"
+	"github.com/cmd-ctrl-q/bookings/internal/handlers"
+	"github.com/cmd-ctrl-q/bookings/internal/render"
 )
 
 const (
