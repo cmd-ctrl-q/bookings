@@ -63,12 +63,13 @@ function Prompt() {
             title = "",
         } = c;
 
-        const { value: formValues } = await Swal.fire({
+        const { value: result } = await Swal.fire({
             title: title,
             html: msg,
-            backdrop: false,
+            // backdrop: true,
             focusConfirm: false,
             showCancelButton: true, 
+            // allowOutsideClick: true,
             willOpen: () => {
                 const elem = document.getElementById('reservation-dates-modal');
                 const rp = new DateRangePicker(elem, {
@@ -88,8 +89,25 @@ function Prompt() {
             }
         })
 
-        if (formValues) {
-          Swal.fire(JSON.stringify(formValues))
+        console.log("1. got to result ")
+        if (result) {
+            // if user didn't hit the cancel button
+            if (result.dismiss !== Swal.DismissReason.cancel) {
+                // check values in result if result is not empty
+                if (result.value !== "") {
+                    // if there is a call back
+                    if (c.callback !== undefined) {
+                        // call back the result (ie what user entered)
+                        c.callback(result);
+                    } 
+                } else {
+                    // return a false 
+                    c.callback(false);
+                }
+            } else {
+                // else if user canceled 
+                c.callback(false);
+            }
         }
     }
 

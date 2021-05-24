@@ -17,32 +17,68 @@
         <div class="row">
             <div class="col">
                 <h1>Make Reservation</h1>
+                <p><strong>Reseration Details</strong></p>
             
                 <!-- validation post -->
-                <form action="" method="POST" class="needs-validation" novalidate>
-                
+                <!-- store the emptyReservation into the res variable -->
+                {{ $res := index .Data "reservation" }}
+                <!-- <form action="" method="POST" class="needs-validation" novalidate> -->
+                <form action="" method="post" class="" novalidate>
+                    <input type="hidden" name="csrf_token" value="{{ .CSRFToken }}">
+
                     <!-- first name -->
-                    <div class="form-group mt-5">
+                    <div class="form-group mt-3">
                         <label for="first_name">First name:</label>
-                        <input type="text" name="first_name" id="first_name" class="form-control" required autocomplete="off" />
+                        <!-- if there is an error associated with the first_name -->
+                        {{ with .Form.Errors.Get "first_name" }}
+                            <label class="text-danger" for="">{{ . }}</label>
+                        {{ end }}
+                        <input type="text" name="first_name" 
+                            id="first_name" 
+                            class='form-control {{ with .Form.Errors.Get "first_name" }} is-invalid {{ end }}' 
+                            value="{{ $res.FirstName }}"
+                            required autocomplete="off" />
                     </div>
                 
                     <!-- last name -->
                     <div class="form-group pt-3">
                         <label for="last_name">Last name:</label>
-                        <input type="text" name="last_name" id="last_name" class="form-control" required autocomplete="off" />
+                        {{ with .Form.Errors.Get "last_name" }}
+                            <label class="text-danger" for="">{{ . }}</label>
+                        {{ end }}
+                        <input type="text" name="last_name" 
+                            id="last_name" 
+                            class='form-control {{ with .Form.Errors.Get "last_name" }} is-invalid {{ end }}' 
+                            value="{{ $res.LastName }}"
+                            required autocomplete="off" />
                     </div>
                 
                     <!-- email -->
                     <div class="form-group pt-3">
-                        <label for="last_name">Email:</label>
-                        <input type="text" name="emailj" id="email" class="form-control" required autocomplete="off" />
+                        <label for="email">Email:</label>
+                        {{ with .Form.Errors.Get "email" }}
+                            <label class="text-danger" for="">{{ . }}</label>
+                        {{ end }}
+                        <input type="email" name="email" 
+                            id="email" 
+                            class='form-control {{ with .Form.Errors.Get "email" }} is-invalid {{ end }}' 
+                            value="{{ $res.Email }}"
+                            required autocomplete="off" />
                     </div>
                 
                     <!-- phone number -->
                     <div class="form-group pt-3">
                         <label for="phone">Phone number:</label>
-                        <input type="text" name="phone" id="phone" class="form-control" required autocomplete="off" />
+                        {{ with .Form.Errors.Get "phone" }}
+                            <label class="text-danger" for="">{{ . }}</label>
+                        {{ end }}
+                        <input type="tel" name="phone" 
+                            id="phone" 
+                            value="{{ $res.Phone }}"
+                            class='form-control {{ with .Form.Errors.Get "phone" }} is-invalid {{ end }}' 
+                            pattern="([0-9]{1}[-\/])?[0-9]{3}[-\/]?[0-9]{3}[-\/]?[0-9]{4}" 
+                            class="form-control" 
+                            required autocomplete="off" />
                     </div>
                 
                     <hr>
