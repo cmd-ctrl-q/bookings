@@ -1,21 +1,20 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/justinas/nosurf"
 )
 
-// WriteToConsole writes something to the console (testing purposes)
-func WriteToConsole(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		fmt.Println("hit the page")
+// // WriteToConsole writes something to the console (testing purposes)
+// func WriteToConsole(next http.Handler) http.Handler {
+// 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+// 		fmt.Println("hit the page")
 
-		// serve the next middleare
-		next.ServeHTTP(w, r)
-	})
-}
+// 		// serve the next middleare
+// 		next.ServeHTTP(w, r)
+// 	})
+// }
 
 // NoSurf adds CSRF production to all POST requests
 func NoSurf(next http.Handler) http.Handler {

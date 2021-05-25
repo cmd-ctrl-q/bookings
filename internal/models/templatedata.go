@@ -11,9 +11,13 @@ type TemplateData struct {
 	Data      map[string]interface{} `json:"data"`
 
 	// Cross-site Request Forgery Token
-	CSRFToken string      `json:"csrf_token"`
-	Flash     string      `json:"flash"`
-	Warning   string      `json:"warning"`
-	Error     string      `json:"error"`
-	Form      *forms.Form `json:"form"`
+	CSRFToken string `json:"csrf_token"`
+
+	// Flash, Warning, and Error are used to send messages to the user
+	Flash   string `json:"flash"`
+	Warning string `json:"warning"`
+	Error   string `json:"error"`
+
+	// Form is the html form
+	Form *forms.Form `json:"form"`
 }
