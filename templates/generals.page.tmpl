@@ -47,11 +47,9 @@
 
 {{ define "js" }}
     <script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/js/datepicker-full.min.js"></script>
-    <script src="https://unpkg.com/notie"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- <script src="../static/js/availability.js"></script> -->
     <script>
-    let attention = Prompt();
 
     document.getElementById("check-availability-button").addEventListener("click", function() {
         let html = `
@@ -67,43 +65,39 @@
         </form>
         `
         attention.custom({
-            msg: html, 
-            title: "Choose your dates", 
-
+            title: 'Choose your dates',
+            msg: html,
             willOpen: () => {
-                const elem = document.getElementById('reservation-dates-modal');
+                const elem = document.getElementById("reservation-dates-modal");
                 const rp = new DateRangePicker(elem, {
                     format: 'yyyy-mm-dd',
                     showOnFocus: true,
                 })
             },
-
             didOpen: () => {
-                document.getElementById('start').removeAttribute('disabled');
-                document.getElementById('end').removeAttribute('disabled');
+                document.getElementById("start").removeAttribute("disabled");
+                document.getElementById("end").removeAttribute("disabled");
             },
-
             callback: function(result) {
                 console.log("called");
-                let form = document.getElementById("check-availability-form");
-                // get the data from the form using FormData()
-                // ie contains all of the inputs from the form.
-                let formData = new FormData(form);
-                // append csrf token to variable 
-                formData.append("csrf_token", "{{ .CSRFToken }}");
 
-                // fetch is ajax call 
+                let form = document.getElementById("check-availability-form");
+                let formData = new FormData(form);
+                formData.append("csrf_token", "{{.CSRFToken}}");
+
                 fetch('/search-availability-json', {
-                    method: "post", 
+                    method: "post",
                     body: formData,
                 })
                     .then(response => response.json())
                     .then(data => {
                         console.log(data);
+                        console.log(data.ok);
+                        console.log(data.message);
                     })
             }
         });
     });
-
+    
     </script>
 {{ end }}
