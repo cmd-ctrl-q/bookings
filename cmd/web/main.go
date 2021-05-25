@@ -76,7 +76,6 @@ func main() {
 }
 
 func run() error {
-
 	// what am I going to put in the session
 	gob.Register(models.Reservation{})
 
