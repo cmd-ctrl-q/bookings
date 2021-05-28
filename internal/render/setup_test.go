@@ -36,3 +36,27 @@ func TestMain(m *testing.M) {
 
 	os.Exit(m.Run())
 }
+
+type myWriter struct{}
+
+func (w *myWriter) Header() http.Header {
+	return http.Header{}
+}
+
+func (w *myWriter) Write(b []byte) (int, error) {
+	return len(b), nil
+}
+
+func (w *myWriter) WriteHeader(statusCode int) {}
+
+func TestNewTemplates(t *testing.T) {
+	NewTemplates(app)
+}
+
+func TestCreateTemplateCache(t *testing.T) {
+	_, err := CreateTemplateCache()
+	if err != nil {
+		t.Error(err)
+	}
+
+}
