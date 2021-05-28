@@ -31,3 +31,9 @@
 # Workspace 
 .vscode 
 *workspace*
+
+# compiled files
+bookings
+
+# other
+HOWTO.md
