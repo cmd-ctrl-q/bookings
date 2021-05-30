@@ -8,6 +8,7 @@ import (
 
 	"github.com/cmd-ctrl-q/bookings/internal/config"
 	"github.com/cmd-ctrl-q/bookings/internal/forms"
+	"github.com/cmd-ctrl-q/bookings/internal/helpers"
 	"github.com/cmd-ctrl-q/bookings/internal/models"
 	"github.com/cmd-ctrl-q/bookings/internal/render"
 )
@@ -34,28 +35,13 @@ func NewHandlers(r *Repository) {
 
 // Home is the handler for the home page
 func (m *Repository) Home(w http.ResponseWriter, r *http.Request) {
-	// get the remote ip address of the person visiting the site and store in session.
-	remoteIP := r.RemoteAddr                              // get ip (version 4 or 6)
-	m.App.Session.Put(r.Context(), "remote_ip", remoteIP) // add ip to session
 	render.RenderTemplate(w, r, "home.page.tmpl", &models.TemplateData{})
 }
 
 // About is the handler for the about page
 func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
-	// perform some logic
-	stringMap := make(map[string]string)
-	stringMap["test"] = "Hello, again"
-
-	// get users ip from session
-	remoteIP := m.App.Session.GetString(r.Context(), "remote_ip")
-
-	// store users ip into stringMap
-	stringMap["remote_ip"] = remoteIP
-
 	// send data to the template
-	render.RenderTemplate(w, r, "about.page.tmpl", &models.TemplateData{
-		StringMap: stringMap,
-	})
+	render.RenderTemplate(w, r, "about.page.tmpl", &models.TemplateData{})
 }
 
 // Generals renders the generals room page
@@ -81,7 +67,8 @@ func (m *Repository) Reservation(w http.ResponseWriter, r *http.Request) {
 func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
 	err := r.ParseForm()
 	if err != nil {
-		log.Println(err)
+		// log error
+		helpers.ServerError(w, err)
 		return
 	}
 
@@ -125,7 +112,8 @@ func (m *Repository) ReservationSummary(w http.ResponseWriter, r *http.Request) 
 	// pull value out of session (which was stored into session in the PostReservation() handler)
 	reservation, ok := m.App.Session.Get(r.Context(), "reservation").(models.Reservation)
 	if !ok {
-		log.Println("Cannot get item from session")
+		// log error
+		m.App.ErrorLog.Println("Can't get error from session")
 		m.App.Session.Put(r.Context(), "error", "Can't get reservation from session")
 		// redirect user to home page
 		http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
@@ -171,6 +159,7 @@ func (m *Repository) AvailabilityJSON(w http.ResponseWriter, r *http.Request) {
 	b, err := json.MarshalIndent(&resp, "", "     ")
 	if err != nil {
 		log.Println("error marshalling data")
+		helpers.ServerError(w, err)
 		return
 	}
 	w.Header().Set("Content-Type", "application/json")

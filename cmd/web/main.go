@@ -5,11 +5,13 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/alexedwards/scs/v2"
 	"github.com/cmd-ctrl-q/bookings/internal/config"
 	"github.com/cmd-ctrl-q/bookings/internal/handlers"
+	"github.com/cmd-ctrl-q/bookings/internal/helpers"
 	"github.com/cmd-ctrl-q/bookings/internal/models"
 	"github.com/cmd-ctrl-q/bookings/internal/render"
 )
@@ -21,6 +23,8 @@ const (
 var (
 	app     config.AppConfig
 	session *scs.SessionManager
+	infoLog *log.Logger
+	errLog  *log.Logger
 )
 
 func main() {
@@ -35,6 +39,14 @@ func main() {
 
 	// change this to true when in production (there is a better way to do this)
 	app.InProduction = false
+
+	// initialize loggers
+	// info logger
+	infoLog := log.New(os.Stdout, "INFO\t", log.Ldate|log.Ltime)
+	app.InfoLog = infoLog
+	// error logger
+	errLog = log.New(os.Stdout, "ERROR\t", log.Ldate|log.Ltime|log.Lshortfile)
+	app.ErrorLog = errLog
 
 	// initialize sessions
 	session = scs.New()
@@ -103,8 +115,8 @@ func run() error {
 
 	repo := handlers.NewRepo(&app)
 	handlers.NewHandlers(repo)
-
 	render.NewTemplates(&app)
+	helpers.NewHelpers(&app)
 
 	return nil
 }
