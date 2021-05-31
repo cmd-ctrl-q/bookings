@@ -38,3 +38,7 @@ bookings
 # other
 HOWTO.md
 */*/README.md
+*.drawio
+
+# db
+database.yml
