@@ -1,7 +1,7 @@
 BEGIN;
 
 CREATE TABLE "room_restrictions" (
-  "id" integer PRIMARY KEY,
+  "id" serial PRIMARY KEY,
   "start_date" date NOT NULL,
   "end_date" date NOT NULL,
   "room_id" integer NOT NULL,

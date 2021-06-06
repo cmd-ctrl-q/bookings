@@ -1,7 +1,7 @@
 BEGIN;
 
 CREATE TABLE "reservations" (
-  "id" integer PRIMARY KEY,
+  "id" serial PRIMARY KEY,
   "first_name" varchar(255) NOT NULL DEFAULT '',
   "last_name" varchar(255) NOT NULL DEFAULT '',
   "email" varchar(255) NOT NULL,
