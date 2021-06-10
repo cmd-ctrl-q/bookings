@@ -27,6 +27,7 @@ func routes(app *config.AppConfig) http.Handler {
 	mux.Get("/search-availability", handlers.Repo.Availability)      // displays the web pages
 	mux.Post("/search-availability", handlers.Repo.PostAvailability) // posts the info to the backend.
 	mux.Post("/search-availability-json", handlers.Repo.AvailabilityJSON)
+	mux.Get("/choose-room/{id}", handlers.Repo.ChooseRoom)
 
 	mux.Get("/make-reservation", handlers.Repo.Reservation)
 	mux.Post("/make-reservation", handlers.Repo.PostReservation)

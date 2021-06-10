@@ -16,15 +16,24 @@
     
         <div class="row">
             <div class="col">
-                <h1>Make Reservation</h1>
-                <p><strong>Reseration Details</strong></p>
-            
-                <!-- validation post -->
-                <!-- store the emptyReservation into the res variable -->
+
                 {{ $res := index .Data "reservation" }}
-                <!-- <form action="" method="POST" class="needs-validation" novalidate> -->
-                <form action="" method="post" class="" novalidate>
+
+                <h1>Make Reservation</h1>
+                <p>
+                    <strong>Reseration Details</strong><br>
+                    Room: {{ $res.Room.RoomName }}<br>
+                    Arrival: {{ index .StringMap "start_date" }}<br>
+                    Departure: {{ index .StringMap "end_date" }}<br>
+                </p>
+
+                <!-- validation post -->
+                <form action="/make-reservation" method="post" class="" novalidate>
                     <input type="hidden" name="csrf_token" value="{{ .CSRFToken }}">
+                    <input type="hidden" name="start_date" value="{{ index .StringMap "start_date" }}">
+                    <input type="hidden" name="end_date" value="{{ index .StringMap "end_date" }}">
+                    <input type="hidden" name="room_id" value="{{ $res.RoomID }}">
+ 
 
                     <!-- first name -->
                     <div class="form-group mt-3">
@@ -52,22 +61,7 @@
                             value="{{ $res.LastName }}"
                             required autocomplete="off" />
                     </div>
-
-                    <!-- start date -->
-                    <div class="form-group">
-                        <label for="start_date">Start Date</label>
-                        <input type="text" name="start_date" id="start_date" class="form-control">
-                    </div>
-
-                    <!-- end date -->
-                    <div class="form-group">
-                        <label for="end_date">End Date</label>
-                        <input type="text" name="end_date" id="end_date" class="form-control">
-                    </div>
-
-                    <!-- room id -->
-                    <input type="hidden" name="room_id" value="1">
-                
+               
                     <!-- email -->
                     <div class="form-group pt-3">
                         <label for="email">Email:</label>
