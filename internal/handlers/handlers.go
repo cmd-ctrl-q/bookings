@@ -112,6 +112,29 @@ func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// sd := r.Form.Get("start_date")
+	// ed := r.Form.Get("end_date")
+
+	// 2020-01-01 -- 01/02 03:04:05PM '06 -0700
+	// layout := "2006-01-02"
+	// startDate, err := time.Parse(layout, sd)
+	// if err != nil {
+	// 	helpers.ServerError(w, err)
+	// 	return
+	// }
+	// endDate, err := time.Parse(layout, ed)
+	// if err != nil {
+	// 	helpers.ServerError(w, err)
+	// 	return
+	// }
+
+	// // get room id
+	// roomID, err := strconv.Atoi(r.Form.Get("room_id"))
+	// if err != nil {
+	// 	helpers.ServerError(w, err)
+	// 	return
+	// }
+
 	// update reservation
 	reservation.FirstName = r.Form.Get("first_name")
 	reservation.LastName = r.Form.Get("last_name")
@@ -165,7 +188,7 @@ func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/reservation-summary", http.StatusSeeOther)
 }
 
-// ReservationSummary displays the reservation summary page
+// ReservationSummary
 func (m *Repository) ReservationSummary(w http.ResponseWriter, r *http.Request) {
 	// if "reservation" is in the Session and if it asserts to type models.Reservation
 	// pull value out of session (which was stored into session in the PostReservation() handler)
@@ -298,7 +321,6 @@ func (m *Repository) Majors(w http.ResponseWriter, r *http.Request) {
 	render.Template(w, r, "majors.page.tmpl", &models.TemplateData{})
 }
 
-// ChooseRoom displays list of available rooms
 func (m *Repository) ChooseRoom(w http.ResponseWriter, r *http.Request) {
 	roomID, err := strconv.Atoi(chi.URLParam(r, "id"))
 	if err != nil {
@@ -319,38 +341,4 @@ func (m *Repository) ChooseRoom(w http.ResponseWriter, r *http.Request) {
 	m.App.Session.Put(r.Context(), "reservation", res)
 
 	http.Redirect(w, r, "/make-reservation", http.StatusSeeOther)
-}
-
-// BookRoom takes URL parameters, builds a sessional varaible, and takes user to make res screen
-func (m *Repository) BookRoom(w http.ResponseWriter, r *http.Request) {
-
-	// get values (id, s, e) from url
-	roomID, _ := strconv.Atoi(r.URL.Query().Get("id"))
-	sd := r.URL.Query().Get("s")
-	ed := r.URL.Query().Get("e")
-
-	layout := "2006-01-02"
-	startDate, _ := time.Parse(layout, sd)
-	endDate, _ := time.Parse(layout, ed)
-
-	var res models.Reservation
-
-	room, err := m.DB.GetRoomByID(roomID)
-	if err != nil {
-		helpers.ServerError(w, err)
-		return
-	}
-
-	res.Room.RoomName = room.RoomName
-	res.RoomID = roomID
-	res.StartDate = startDate
-	res.EndDate = endDate
-
-	// add data to session
-	m.App.Session.Put(r.Context(), "reservation", res)
-
-	// take user to reservation page
-	http.Redirect(w, r, "/make-reservation", http.StatusSeeOther)
-
-	log.Println(roomID, startDate, endDate)
 }
