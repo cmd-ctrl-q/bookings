@@ -87,7 +87,7 @@ func (m *postgresDBRepo) SearchAvailabilityBydatesByRoomID(start, end time.Time,
 			room_restrictions
 		where 
 			room_id = $1
-			$2 < end_date and $3 > start_date;
+			and $2 < end_date and $3 > start_date;
 	`
 
 	var numRows int
@@ -97,7 +97,6 @@ func (m *postgresDBRepo) SearchAvailabilityBydatesByRoomID(start, end time.Time,
 		return false, err
 	}
 
-	// return true if dates are available
 	if numRows == 0 {
 		return true, nil
 	}
