@@ -59,7 +59,7 @@ func (w *myWriter) Write(b []byte) (int, error) {
 func (w *myWriter) WriteHeader(statusCode int) {}
 
 func TestNewTemplates(t *testing.T) {
-	NewTemplates(app)
+	NewRenderer(app)
 }
 
 func TestCreateTemplateCache(t *testing.T) {
