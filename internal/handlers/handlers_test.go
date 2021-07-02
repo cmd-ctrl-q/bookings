@@ -348,8 +348,9 @@ func TestRepository_PostAvailability(t *testing.T) {
 	*****************************************/
 	// this time, we specify a start date before 2040-01-01, which will give us
 	// a non-empty slice, indicating that rooms are available
-	reqBody = "start=2040-01-01"
-	reqBody = fmt.Sprintf("%s&%s", reqBody, "end=2040-01-02")
+	// NOTE: dates do not work beyond 2049.(not sure why)
+	reqBody = "start=2030-01-01"
+	reqBody = fmt.Sprintf("%s&%s", reqBody, "end=2030-01-02")
 
 	// create our request
 	req, _ = http.NewRequest("POST", "/search-availability", strings.NewReader(reqBody))
