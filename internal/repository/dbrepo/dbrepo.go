@@ -9,8 +9,7 @@ import (
 
 type postgresDBRepo struct {
 	App *config.AppConfig
-	// DB connection pool
-	DB *sql.DB
+	DB  *sql.DB
 }
 
 type testDBRepo struct {
