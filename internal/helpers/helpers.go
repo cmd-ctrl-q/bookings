@@ -29,3 +29,9 @@ func ServerError(w http.ResponseWriter, err error) {
 
 	http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
 }
+
+// IsAuthenticated checks if user is authenticated
+func IsAuthenticated(r *http.Request) bool {
+	exists := app.Session.Exists(r.Context(), "user_id")
+	return exists
+}
