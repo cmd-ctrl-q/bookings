@@ -20,4 +20,8 @@ type TemplateData struct {
 
 	// Form is the html form
 	Form *forms.Form `json:"form"`
+
+	// if value > 0 then user is logged in.
+	// if value < 0 then user is not logged in.
+	IsAuthenticated int
 }
