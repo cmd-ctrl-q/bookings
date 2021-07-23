@@ -75,9 +75,49 @@ Reservation
                 
         <hr>
                 
-        <input type="submit" class="btn btn-primary" value="Save">
+        <div class="float-left">
+            <input type="submit" class="btn btn-primary" value="Save">
+            <a href="/admin/reservations-{{$src}}" class="btn btn-warning">Cancel</a>
+            <a href="#!" class="btn btn-info" onclick="processRes({{ $res.ID }})">Mark as Process</a>
+        </div>
+        
+        <div class="float-right">
+            <a href="#!" class="btn btn-danger" onclick="deleteRes({{ $res.ID }})">Delete</a>
+        </div>
 
-        <a href="/admin/reservations-{{$src}}" class="btn btn-warning">Cancel</a>
+        <!-- necessary for properly rendering -->
+        <div class="clearfix"></div>
     </form>
 </div>
+{{ end }}
+
+{{ define "js" }}
+{{ $src := index .StringMap "src" }}
+<script>
+    function processRes(id) {
+        attention.custom({
+            icon: "warning", 
+            msg: "Are you sure?",
+            callback: function(result) {
+                if (result !== false) {
+                    // change browers location to
+                    window.location.href = "/admin/process-reservation/{{$src}}/" + id;
+                }
+            }
+        })
+    }
+
+    function deleteRes(id) {
+        attention.custom({
+            icon: "warning", 
+            msg: "Are you sure?",
+            callback: function(result) {
+                if (result !== false) {
+                    // change browers location to
+                    window.location.href = "/admin/delete-reservation/{{$src}}/" + id;
+                }
+            }
+        })
+    }
+</script>
 {{ end }}
